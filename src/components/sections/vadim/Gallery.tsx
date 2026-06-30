@@ -1,17 +1,18 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import { interLocal } from './inter-local'
 
 const GRID = [200, 400, 600, 800, 1000, 1200, 1400, 1601, 1801]
 
 const PHOTOS = [
-  { src: '/images/section7/photo1.webp', left: -190 },
-  { src: '/images/section7/photo2.webp', left: 390 },
-  { src: '/images/section7/photo3.webp', left: 970 },
-  { src: '/images/section7/photo4.webp', left: 1550 },
+  '/images/section7/photo1.webp',
+  '/images/section7/photo2.webp',
+  '/images/section7/photo3.webp',
+  '/images/section7/photo4.webp',
 ]
+const PHOTO_POS = [-190, 390, 970, 1550]
 
 // TODO: заменить на реальные YouTube ID роликов Вадима
 const VIDEOS: { left: number; img: string; play: number; youtubeId: string }[] = [
@@ -21,17 +22,32 @@ const VIDEOS: { left: number; img: string; play: number; youtubeId: string }[] =
 
 export function Gallery() {
   const [activeId, setActiveId] = useState<string | null>(null)
+  const [photoIndex, setPhotoIndex] = useState<number | null>(null)
+  const touchX = useRef<number | null>(null)
+
+  const closeAll = useCallback(() => {
+    setActiveId(null)
+    setPhotoIndex(null)
+  }, [])
+  const prev = useCallback(() => setPhotoIndex((i) => (i === null ? i : (i - 1 + PHOTOS.length) % PHOTOS.length)), [])
+  const next = useCallback(() => setPhotoIndex((i) => (i === null ? i : (i + 1) % PHOTOS.length)), [])
+
+  const isOpen = activeId !== null || photoIndex !== null
 
   useEffect(() => {
-    if (!activeId) return
+    if (!isOpen) return
     document.body.style.overflow = 'hidden'
-    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setActiveId(null)
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') closeAll()
+      if (photoIndex !== null && e.key === 'ArrowLeft') prev()
+      if (photoIndex !== null && e.key === 'ArrowRight') next()
+    }
     window.addEventListener('keydown', onKey)
     return () => {
       document.body.style.overflow = ''
       window.removeEventListener('keydown', onKey)
     }
-  }, [activeId])
+  }, [isOpen, photoIndex, closeAll, prev, next])
 
   return (
     <section
@@ -61,7 +77,7 @@ export function Gallery() {
           <p className="text-[62.8px] font-black uppercase leading-[101px]">Интенсив?</p>
         </div>
 
-        {/* video tiles — clickable */}
+        {/* video tiles — open YouTube lightbox */}
         {VIDEOS.map((v) => (
           <button
             key={v.left}
@@ -80,26 +96,28 @@ export function Gallery() {
           </div>
         ))}
 
-        {/* photo strip */}
-        {PHOTOS.map((p) => (
-          <div key={p.src} className="absolute" style={{ left: p.left, top: 650, width: 560, height: 300 }}>
-            <Image src={p.src} alt="" fill className="object-contain" sizes="560px" />
-          </div>
+        {/* photo strip — open paging lightbox */}
+        {PHOTOS.map((src, i) => (
+          <button
+            key={src}
+            type="button"
+            onClick={() => setPhotoIndex(i)}
+            aria-label={`Открыть фото ${i + 1}`}
+            className="group absolute cursor-pointer overflow-hidden rounded-[20px] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
+            style={{ left: PHOTO_POS[i], top: 650, width: 560, height: 300 }}
+          >
+            <Image src={src} alt={`Фото с интенсива ${i + 1}`} fill className="object-contain transition duration-300 group-hover:scale-[1.03]" sizes="560px" />
+          </button>
         ))}
       </div>
 
       {/* video lightbox */}
       {activeId && (
-        <div
-          className="fixed inset-0 z-[100] flex items-center justify-center p-4"
-          role="dialog"
-          aria-modal="true"
-          aria-label="Видео"
-        >
-          <button aria-label="Закрыть" className="absolute inset-0 cursor-default bg-black/80 backdrop-blur-sm" onClick={() => setActiveId(null)} />
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-label="Видео">
+          <button aria-label="Закрыть" className="absolute inset-0 cursor-default bg-black/80 backdrop-blur-sm" onClick={closeAll} />
           <button
             aria-label="Закрыть"
-            onClick={() => setActiveId(null)}
+            onClick={closeAll}
             className="absolute right-5 top-5 z-10 flex h-11 w-11 items-center justify-center rounded-full text-2xl text-white/70 transition hover:bg-white/10 hover:text-white"
           >
             ✕
@@ -112,6 +130,61 @@ export function Gallery() {
               allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
               allowFullScreen
             />
+          </div>
+        </div>
+      )}
+
+      {/* photo lightbox with paging */}
+      {photoIndex !== null && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-label="Галерея фото">
+          <button aria-label="Закрыть" className="absolute inset-0 cursor-default bg-black/85 backdrop-blur-sm" onClick={closeAll} />
+
+          <button
+            aria-label="Закрыть"
+            onClick={closeAll}
+            className="absolute right-5 top-5 z-20 flex h-11 w-11 items-center justify-center rounded-full text-2xl text-white/70 transition hover:bg-white/10 hover:text-white"
+          >
+            ✕
+          </button>
+
+          <button
+            aria-label="Предыдущее фото"
+            onClick={prev}
+            className="absolute left-3 z-20 flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-2xl text-white transition hover:bg-white/20 sm:left-8"
+          >
+            ‹
+          </button>
+          <button
+            aria-label="Следующее фото"
+            onClick={next}
+            className="absolute right-3 z-20 flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-2xl text-white transition hover:bg-white/20 sm:right-8"
+          >
+            ›
+          </button>
+
+          <div
+            className="relative z-10 flex aspect-[1120/600] w-full max-w-[1000px] items-center justify-center"
+            onTouchStart={(e) => (touchX.current = e.touches[0].clientX)}
+            onTouchEnd={(e) => {
+              if (touchX.current === null) return
+              const dx = e.changedTouches[0].clientX - touchX.current
+              if (dx > 40) prev()
+              else if (dx < -40) next()
+              touchX.current = null
+            }}
+          >
+            <Image
+              key={PHOTOS[photoIndex]}
+              src={PHOTOS[photoIndex]}
+              alt={`Фото с интенсива ${photoIndex + 1}`}
+              fill
+              className="rounded-2xl object-contain"
+              sizes="1000px"
+            />
+          </div>
+
+          <div className="absolute bottom-6 left-1/2 z-20 -translate-x-1/2 text-sm text-white/70">
+            {photoIndex + 1} / {PHOTOS.length}
           </div>
         </div>
       )}
