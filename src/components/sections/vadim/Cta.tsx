@@ -1,4 +1,7 @@
+'use client'
+
 import Image from 'next/image'
+import { useLeadModal } from './LeadModal'
 
 export function Arrow({ flip = false }: { flip?: boolean }) {
   return (
@@ -15,15 +18,17 @@ export function Arrow({ flip = false }: { flip?: boolean }) {
 
 // CTA button cluster anchored at the button's top-left, matching the Figma offsets
 // (label +26/+27, arrows at -75 / +350, +28).
-export function CtaButton({ left, top, href = '#top' }: { left: number; top: number; href?: string }) {
+export function CtaButton({ left, top }: { left: number; top: number }) {
+  const { open } = useLeadModal()
   return (
     <>
       <div className="group absolute rounded-[10px] shadow-[25px_25px_55px_0px_rgba(0,0,0,0.4)]" style={{ left, top, width: 300, height: 75 }}>
         <Image src="/images/section1/button.webp" alt="" fill className="rounded-[10px] object-cover transition duration-200 group-hover:brightness-110" sizes="300px" />
-        <a
-          href={href}
+        <button
+          type="button"
+          onClick={open}
           aria-label="Оставить заявку"
-          className="absolute inset-0 z-10 cursor-pointer rounded-[10px] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
+          className="absolute inset-0 z-10 cursor-pointer rounded-[10px] transition active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
         />
       </div>
       <div className="pointer-events-none absolute text-center" style={{ left: left + 26, top: top + 27, width: 246 }}>

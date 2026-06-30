@@ -1,12 +1,16 @@
+'use client'
+
 import Image from 'next/image'
 import { interLocal } from './inter-local'
 import { Arrow } from './Cta'
+import { useLeadModal } from './LeadModal'
 
 function Dot({ left, top }: { left: number; top: number }) {
   return <div className="absolute h-[5px] w-[5px] rounded-full bg-[#ba54c0]" style={{ left, top }} />
 }
 
 export function Speaker() {
+  const { open } = useLeadModal()
   return (
     <section
       className={`${interLocal.variable} relative w-full overflow-hidden bg-[#070707]`}
@@ -102,10 +106,11 @@ export function Speaker() {
         <div className="absolute rounded-[10px] shadow-[25px_25px_55px_0px_rgba(0,0,0,0.4)]" style={{ left: 939, top: 855, width: 300, height: 75 }}>
           <Image src="/images/section1/button.webp" alt="" fill className="rounded-[10px] object-cover" sizes="300px" />
         </div>
-        <a
-          href="#top"
+        <button
+          type="button"
+          onClick={open}
           aria-label="Оставить заявку"
-          className="absolute z-20 cursor-pointer rounded-[10px] transition-colors duration-200 hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
+          className="absolute z-20 cursor-pointer rounded-[10px] transition-colors duration-200 hover:bg-white/10 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
           style={{ left: 939, top: 855, width: 300, height: 75 }}
         />
         <div className="absolute text-center" style={{ left: 965, top: 882, width: 246 }}>

@@ -1,6 +1,10 @@
+'use client'
+
+import { useRef } from 'react'
 import Image from 'next/image'
 import { interLocal } from './inter-local'
 import { CtaButton } from './Cta'
+import { gsap, useGSAP } from '@/lib/gsap'
 
 const GRID = [199, 399, 599, 799, 999, 1199, 1399, 1599, 1799]
 
@@ -20,8 +24,27 @@ const TAGS = [
 
 
 export function Benefits() {
+  const scope = useRef<HTMLElement>(null)
+
+  useGSAP(
+    () => {
+      const mm = gsap.matchMedia()
+      mm.add('(prefers-reduced-motion: no-preference)', () => {
+        gsap
+          .timeline({
+            scrollTrigger: { trigger: scope.current, start: 'top 70%', once: true },
+            defaults: { ease: 'power2.out' },
+          })
+          .from('[data-anim="bcard"]', { y: 30, opacity: 0, duration: 0.6, stagger: 0.08 })
+          .from('[data-anim="btext"]', { y: 16, opacity: 0, duration: 0.5, stagger: 0.06 }, '-=0.3')
+      })
+    },
+    { scope }
+  )
+
   return (
     <section
+      ref={scope}
       className={`${interLocal.variable} relative w-full overflow-hidden bg-[#070707]`}
       style={{ containerType: 'inline-size', aspectRatio: '1920 / 1024' }}
     >
@@ -54,32 +77,32 @@ export function Benefits() {
 
         {/* card icons + tags */}
         {ICONS.map((ic) => (
-          <div key={ic.src} className="absolute" style={{ left: ic.left, top: ic.top, width: ic.w, height: ic.h }}>
+          <div key={ic.src} data-anim="bcard" className="absolute" style={{ left: ic.left, top: ic.top, width: ic.w, height: ic.h }}>
             <Image src={ic.src} alt="" fill className="object-contain" sizes="280px" />
           </div>
         ))}
         {TAGS.map((tg) => (
-          <div key={tg.src} className="absolute" style={{ left: tg.left, top: tg.top, width: tg.w, height: tg.h }}>
+          <div key={tg.src} data-anim="bcard" className="absolute" style={{ left: tg.left, top: tg.top, width: tg.w, height: tg.h }}>
             <Image src={tg.src} alt="" fill className="object-contain" sizes="240px" />
           </div>
         ))}
 
         {/* card 1 text */}
-        <div className="absolute text-center" style={{ left: 392, top: 666, width: 252 }}>
+        <div data-anim="btext" className="absolute text-center" style={{ left: 392, top: 666, width: 252 }}>
           <p className="text-[17px] font-extrabold leading-[25px]">Последние тренды</p>
           <p className="text-[17px] font-light leading-[25px]">маркетинга и продаж в</p>
           <p className="text-[17px] font-light leading-[25px]">бьюти сфере</p>
         </div>
 
         {/* card 2 text */}
-        <div className="absolute text-center" style={{ left: 687, top: 331, width: 252 }}>
+        <div data-anim="btext" className="absolute text-center" style={{ left: 687, top: 331, width: 252 }}>
           <p className="text-[17.2px] font-light leading-[25px]">Как построить эффективный</p>
           <p className="text-[17.2px] font-light leading-[25px]">отдел продаж, который</p>
           <p className="text-[17.2px] font-extrabold leading-[25px]">выполняет планы</p>
         </div>
 
         {/* card 3 text */}
-        <div className="absolute text-center" style={{ left: 978, top: 665, width: 252 }}>
+        <div data-anim="btext" className="absolute text-center" style={{ left: 978, top: 665, width: 252 }}>
           <p className="text-[17.4px] font-light leading-[25px]">Пошаговую инструкцию,</p>
           <p className="text-[17.4px] font-light leading-[25px]">
             как сделать <span className="font-extrabold">X2 в вашем</span>
@@ -88,7 +111,7 @@ export function Benefits() {
         </div>
 
         {/* card 4 text */}
-        <div className="absolute text-center" style={{ left: 1275, top: 331, width: 252 }}>
+        <div data-anim="btext" className="absolute text-center" style={{ left: 1275, top: 331, width: 252 }}>
           <p className="text-[17.4px] font-light leading-[25px]">
             Как <span className="font-extrabold">нанять команду мечты</span>
           </p>

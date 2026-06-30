@@ -9,7 +9,7 @@ type Bullet = { top: number; w: number; fs: number; lines: Seg[][] }
 
 const DAY1: Bullet[] = [
   { top: 584, w: 364, fs: 17.3, lines: [[{ t: 'Лидер. Харизма.', b: true }, { t: ' Пример для команды;' }]] },
-  { top: 619, w: 386, fs: 17.2, lines: [[{ t: 'Структура cалона красоты.', b: true }, { t: ' Роли и задачи;' }]] },
+  { top: 619, w: 386, fs: 17.2, lines: [[{ t: 'Структура салона красоты.', b: true }, { t: ' Роли и задачи;' }]] },
   { top: 654, w: 408, fs: 17.4, lines: [[{ t: 'Найм сотрудников', b: true }, { t: ' и где их искать;' }]] },
   { top: 689, w: 408, fs: 17.4, lines: [[{ t: 'Как нанимать людей', b: true }, { t: ' быстро и качественно;' }]] },
   { top: 725, w: 408, fs: 17.7, lines: [[{ t: 'Мотивация сотрудников.', b: true }], [{ t: 'Как нанимать в долгую;' }]] },
@@ -25,8 +25,8 @@ const DAY1: Bullet[] = [
 
 const DAY2: Bullet[] = [
   { top: 584, w: 364, fs: 17.7, lines: [[{ t: 'Выжимаем апельсин – работаем ', b: true }, { t: 'с' }], [{ t: 'базой и доп продажами;' }]] },
-  { top: 645, w: 364, fs: 17.4, lines: [[{ t: 'Конкурентный анализ', b: true }, { t: ' как постоянный' }], [{ t: 'процесс для улучшения продукт;' }]] },
-  { top: 705, w: 364, fs: 17.3, lines: [[{ t: 'Ваше УТП', b: true }, { t: ' – упражение как достать самое' }], [{ t: 'ключевое;' }]] },
+  { top: 645, w: 364, fs: 17.4, lines: [[{ t: 'Конкурентный анализ', b: true }, { t: ' как постоянный' }], [{ t: 'процесс для улучшения продукта;' }]] },
+  { top: 705, w: 364, fs: 17.3, lines: [[{ t: 'Ваше УТП', b: true }, { t: ' – упражнение как достать самое' }], [{ t: 'ключевое;' }]] },
   { top: 765, w: 415, fs: 17.3, lines: [[{ t: 'Как искать ' }, { t: 'таргетолога', b: true }, { t: ' и его контролировать;' }]] },
   { top: 800, w: 415, fs: 17, lines: [[{ t: 'Как считать эффективность рекламы;' }]] },
   { top: 835, w: 415, fs: 17.4, lines: [[{ t: 'Как получать ' }, { t: 'дешевые заявки и много,', b: true }, { t: ' какие' }], [{ t: 'инструменты сейчас в тренде?' }]] },
@@ -91,9 +91,10 @@ export function Program() {
         <div className="absolute" style={{ left: 380, top: 535, width: 560, height: 620 }}>
           <Image src="/images/section4/day1list.webp" alt="" fill className="object-contain" sizes="560px" />
         </div>
+        {/* TODO: уточнить официальное название дня у клиента; тема выведена из пунктов (команда, найм, продажи, сервис) */}
         <div className="absolute" style={{ left: 418, top: 275, width: 306 }}>
-          <p className="text-[43.8px] font-black uppercase leading-[47px]">Название</p>
-          <p className="text-[43.8px] font-black uppercase leading-[47px]">дня</p>
+          <p className="text-[43.8px] font-black uppercase leading-[47px]">Команда</p>
+          <p className="text-[43.8px] font-black uppercase leading-[47px]">и продажи</p>
         </div>
         <div className="absolute" style={{ left: 654, top: 354, width: 210, height: 120.42 }}>
           <Image src="/images/section4/icon1.webp" alt="" fill className="object-contain" sizes="210px" />
@@ -110,9 +111,10 @@ export function Program() {
         <div className="absolute" style={{ left: 980, top: 535, width: 560, height: 766 }}>
           <Image src="/images/section4/day2list.webp" alt="" fill className="object-contain" sizes="560px" />
         </div>
+        {/* TODO: уточнить официальное название дня у клиента; тема выведена из пунктов (маркетинг, реклама, финансы, масштабирование) */}
         <div className="absolute" style={{ left: 1018, top: 275, width: 306 }}>
-          <p className="text-[43.8px] font-black uppercase leading-[47px]">Название</p>
-          <p className="text-[43.8px] font-black uppercase leading-[47px]">дня</p>
+          <p className="text-[43.8px] font-black uppercase leading-[47px]">Маркетинг</p>
+          <p className="text-[43.8px] font-black uppercase leading-[47px]">и масштаб</p>
         </div>
         <div className="absolute" style={{ left: 1194, top: 358, width: 188, height: 114.47 }}>
           <Image src="/images/section4/icon2.webp" alt="" fill className="object-contain" sizes="188px" />

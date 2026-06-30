@@ -7,19 +7,26 @@ import { Results } from '@/components/sections/vadim/Results'
 import { Gallery } from '@/components/sections/vadim/Gallery'
 import { Marquee } from '@/components/sections/vadim/Marquee'
 import { FooterCta } from '@/components/sections/vadim/FooterCta'
+import { ScrollSetup } from '@/components/sections/vadim/ScrollSetup'
+import { LeadModalProvider } from '@/components/sections/vadim/LeadModal'
+import { StickyCta } from '@/components/sections/vadim/StickyCta'
 
 export default function Home() {
   return (
-    <div id="top" className="bg-[#070707]">
-      <Hero />
-      <Benefits />
-      <Audience />
-      <Program />
-      <Speaker />
-      <Results />
-      <Gallery />
-      <Marquee />
-      <FooterCta />
-    </div>
+    <LeadModalProvider>
+      <div id="top" className="bg-[#070707]">
+        <ScrollSetup />
+        <Hero />
+        <Benefits />
+        <Audience />
+        <Program />
+        <Speaker />
+        <Results />
+        <Gallery />
+        <Marquee />
+        <FooterCta />
+        <StickyCta />
+      </div>
+    </LeadModalProvider>
   )
 }

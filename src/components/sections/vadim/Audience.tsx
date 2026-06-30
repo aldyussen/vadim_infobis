@@ -1,6 +1,10 @@
+'use client'
+
+import { useRef } from 'react'
 import Image from 'next/image'
 import { interLocal } from './inter-local'
 import { CtaButton } from './Cta'
+import { gsap, useGSAP } from '@/lib/gsap'
 
 const GRID = [199, 399, 599, 799, 999, 1200, 1400, 1600, 1800]
 
@@ -20,8 +24,27 @@ const CARDS: Card[] = [
 ]
 
 export function Audience() {
+  const scope = useRef<HTMLElement>(null)
+
+  useGSAP(
+    () => {
+      const mm = gsap.matchMedia()
+      mm.add('(prefers-reduced-motion: no-preference)', () => {
+        gsap
+          .timeline({
+            scrollTrigger: { trigger: scope.current, start: 'top 70%', once: true },
+            defaults: { ease: 'power2.out' },
+          })
+          .from('[data-anim="card"]', { y: 30, opacity: 0, duration: 0.6, stagger: 0.1 })
+          .from('[data-anim="cardtext"]', { y: 16, opacity: 0, duration: 0.5, stagger: 0.05 }, '-=0.3')
+      })
+    },
+    { scope }
+  )
+
   return (
     <section
+      ref={scope}
       className={`${interLocal.variable} relative w-full overflow-hidden bg-[#070707]`}
       style={{ containerType: 'inline-size', aspectRatio: '1920 / 1264' }}
     >
@@ -42,13 +65,13 @@ export function Audience() {
         {/* card backgrounds + badges + numbers */}
         {CARDS.map((c) => (
           <div key={c.num}>
-            <div className="absolute" style={{ left: c.card[0], top: c.card[1], width: c.card[2], height: c.card[3] }}>
+            <div data-anim="card" className="absolute" style={{ left: c.card[0], top: c.card[1], width: c.card[2], height: c.card[3] }}>
               <Image src={`/images/section3/${c.img}`} alt="" fill className="object-cover" sizes="680px" />
             </div>
-            <div className="absolute" style={{ left: c.badge[0], top: c.badge[1], width: 220, height: 220 }}>
+            <div data-anim="cardtext" className="absolute" style={{ left: c.badge[0], top: c.badge[1], width: 220, height: 220 }}>
               <Image src="/images/section3/badge.webp" alt="" fill className="object-contain" sizes="220px" />
             </div>
-            <div className="absolute" style={{ left: c.number[0], top: c.number[1] }}>
+            <div data-anim="cardtext" className="absolute" style={{ left: c.number[0], top: c.number[1] }}>
               <p className="font-black leading-[31px]" style={{ fontSize: c.number[2] }}>
                 {c.num}
               </p>
@@ -57,11 +80,11 @@ export function Audience() {
         ))}
 
         {/* card 1 */}
-        <div className="absolute" style={{ left: 430, top: 394, width: 339.73 }}>
+        <div data-anim="cardtext" className="absolute" style={{ left: 430, top: 394, width: 339.73 }}>
           <p className="text-[40px] font-black uppercase leading-[40px]">Руководитель</p>
           <p className="text-[40px] font-black uppercase leading-[40px]">салона</p>
         </div>
-        <div className="absolute" style={{ left: 430, top: 495, width: 305 }}>
+        <div data-anim="cardtext" className="absolute" style={{ left: 430, top: 495, width: 305 }}>
           <p className="text-[17.6px] font-normal leading-[25px]">
             Хочешь <span className="font-extrabold">открыть новый салон</span>
           </p>
@@ -70,23 +93,23 @@ export function Audience() {
         </div>
 
         {/* card 2 */}
-        <div className="absolute" style={{ left: 1113, top: 314, width: 275 }}>
+        <div data-anim="cardtext" className="absolute" style={{ left: 1113, top: 314, width: 275 }}>
           <p className="text-[39.8px] font-black uppercase leading-[40px]">Проблема</p>
           <p className="text-[39.8px] font-black uppercase leading-[40px]">с рекламой</p>
         </div>
-        <div className="absolute" style={{ left: 1113, top: 415, width: 175 }}>
+        <div data-anim="cardtext" className="absolute" style={{ left: 1113, top: 415, width: 175 }}>
           <p className="text-[17.9px] font-extrabold leading-[25px]">Сливаешь деньги</p>
           <p className="text-[17.9px] font-normal leading-[25px]">и не получаешь</p>
           <p className="text-[17.9px] font-normal leading-[25px]">заявки</p>
         </div>
 
         {/* card 3 */}
-        <div className="absolute" style={{ left: 430, top: 680, width: 301.92 }}>
+        <div data-anim="cardtext" className="absolute" style={{ left: 430, top: 680, width: 301.92 }}>
           <p className="text-[38.9px] font-black uppercase leading-[40px]">Уперся в</p>
           <p className="text-[38.9px] font-black uppercase leading-[40px]">финансовый</p>
           <p className="text-[38.9px] font-black uppercase leading-[40px]">потолок</p>
         </div>
-        <div className="absolute" style={{ left: 430, top: 819, width: 215 }}>
+        <div data-anim="cardtext" className="absolute" style={{ left: 430, top: 819, width: 215 }}>
           <p className="text-[17.7px] font-normal leading-[25px]">
             И не знаешь <span className="font-extrabold">как</span>
           </p>
@@ -94,12 +117,12 @@ export function Audience() {
         </div>
 
         {/* card 4 */}
-        <div className="absolute" style={{ left: 912, top: 740, width: 333.89 }}>
+        <div data-anim="cardtext" className="absolute" style={{ left: 912, top: 740, width: 333.89 }}>
           <p className="text-[38.6px] font-black uppercase leading-[40px]">Нет</p>
           <p className="text-[38.6px] font-black uppercase leading-[40px]">правильных</p>
           <p className="text-[38.6px] font-black uppercase leading-[40px]">инструментов</p>
         </div>
-        <div className="absolute" style={{ left: 912, top: 879, width: 340 }}>
+        <div data-anim="cardtext" className="absolute" style={{ left: 912, top: 879, width: 340 }}>
           <p className="text-[17.6px] font-normal leading-[25px]">
             Для кратного <span className="font-extrabold">роста и масштаба</span>
           </p>
