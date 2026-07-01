@@ -8,13 +8,11 @@ import { RegisterForm } from '@/components/sections/ukolova/RegisterForm'
 import { Footer } from '@/components/sections/ukolova/Footer'
 import { StickyCta } from '@/components/sections/vadim/StickyCta'
 import { LeadModalProvider } from '@/components/sections/vadim/LeadModal'
-import { ScrollSetup } from '@/components/sections/vadim/ScrollSetup'
 
-export default function Home() {
+export default function UkolovaPage() {
   return (
     <LeadModalProvider>
       <div id="top" className="bg-mine-shaft">
-        <ScrollSetup />
         <Hero />
         <BookGift />
         <Benefits />

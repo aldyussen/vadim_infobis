@@ -6,6 +6,23 @@
 @custom-variant dark (&:is(.dark *));
 
 /* ============================================================
+   UKOLOVA brand tokens (бежево-тановый лендинг /ukolova).
+   Added per design frame 918:649 — used as bg-tan, text-mongoose, etc.
+   ============================================================ */
+@theme {
+  --color-mine-shaft: #232323;
+  --color-cod-gray: #070707;
+  --color-tan: #c7a379;
+  --color-tan-text: #c9a37b;
+  --color-mongoose: #bc9b80;
+  --color-brand-red: #ff0505;
+  --color-red-orange: #ff2828;
+  --color-gallery: #eeeeee;
+  --color-alabaster: #fafafa;
+  --color-concrete: #f2f2f2;
+}
+
+/* ============================================================
    THEME BRIDGE
    Maps CSS custom properties to Tailwind utility classes.
    All values live in :root / .dark below — change them there,
