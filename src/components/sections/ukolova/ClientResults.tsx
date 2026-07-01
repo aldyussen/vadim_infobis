@@ -6,9 +6,9 @@ import { interLocal } from '../vadim/inter-local'
 import { gsap, useGSAP } from '@/lib/gsap'
 
 const CARDS = [
-  { img: 'case1.webp', fs: 30.3, bold: 'Рост Х3', semi: ' до 7,5 млн', line2: '$/год', descr: 'Продажа металлопроката', dfs: 15.3 },
-  { img: 'case2.webp', fs: 29.9, bold: 'Рост Х12', semi: ' до 60К', line2: '$/мес', descr: 'Банкротство физ.лиц', dfs: 15.1 },
-  { img: 'case3.webp', fs: 29.6, bold: 'Рост Х10', semi: ' до 12k $/', line2: 'мес', descr: 'Автоворонки/чат-боты', dfs: 15.1 },
+  { img: 'case1.webp', fs: 34, bold: 'Рост Х3', semi: ' до 7,5 млн', line2: '$/год', descr: 'Продажа металлопроката', dfs: 16 },
+  { img: 'case2.webp', fs: 33.5, bold: 'Рост Х12', semi: ' до 60К', line2: '$/мес', descr: 'Банкротство физ.лиц', dfs: 16 },
+  { img: 'case3.webp', fs: 33, bold: 'Рост Х10', semi: ' до 12k $/', line2: 'мес', descr: 'Автоворонки/чат-боты', dfs: 16 },
 ]
 
 export function ClientResults() {
@@ -44,8 +44,12 @@ export function ClientResults() {
         <div className="flex h-full flex-col px-[360px] pb-[15px] pt-[30px]">
           <div className="mx-auto flex w-full max-w-[1200px] justify-center gap-[40px]">
             {CARDS.map((c) => (
-              <div key={c.img} data-anim="rcard" className="flex w-[360px] flex-col">
-                <div className="relative h-[237.59px] w-full overflow-hidden rounded-[20px]">
+              <div
+                key={c.img}
+                data-anim="rcard"
+                className="flex w-[360px] flex-col transition-transform duration-300 hover:-translate-y-2"
+              >
+                <div className="relative h-[237.59px] w-full overflow-hidden rounded-[20px] shadow-[0px_16px_40px_-16px_rgba(0,0,0,0.35)]">
                   <Image src={`/images/ukolova/results/${c.img}`} alt="Кейс клиента" fill className="object-cover" sizes="360px" />
                 </div>
                 <div className="flex flex-col items-center gap-[10px] px-[40px] pt-[30px] text-center">

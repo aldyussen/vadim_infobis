@@ -53,8 +53,10 @@ export function Benefits() {
             На тренинге <span className="text-tan">вы получите:</span>
           </p>
         </div>
-        <div className="absolute" style={{ left: 152, top: 233, width: 1046.39 }}>
-          <p className="text-[20px] font-normal leading-[31px]">Методику увеличения прибыли х2–х3 в текущем бизнесе</p>
+        <div className="absolute" style={{ left: 152, top: 230, width: 1046.39 }}>
+          <p className="text-[23px] font-light leading-[32px] text-white/85">
+            Методику увеличения прибыли <span className="font-semibold text-tan">х2–х3</span> в текущем бизнесе
+          </p>
         </div>
 
         {/* bullets */}

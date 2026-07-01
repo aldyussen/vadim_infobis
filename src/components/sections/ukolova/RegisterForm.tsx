@@ -18,8 +18,8 @@ function maskUsPhone(raw: string): string {
 }
 
 const inputCls =
-  'h-[75px] w-full rounded-[10px] border border-white bg-white px-[21px] text-[16px] text-black outline-none placeholder:text-black/50 focus:ring-2 focus:ring-mongoose/40'
-const labelCls = 'block pb-[5px] pr-[10px] text-[14.6px] font-normal text-concrete'
+  'h-[75px] w-full rounded-[10px] border-2 border-white bg-white px-[21px] text-[17px] text-black outline-none transition placeholder:text-black/40 focus:border-mongoose focus:ring-4 focus:ring-mongoose/30'
+const labelCls = 'block pb-[6px] pr-[10px] text-[15px] font-medium text-concrete'
 
 export function RegisterForm() {
   const [phone, setPhone] = useState('')

@@ -40,8 +40,8 @@ export function Method() {
         </div>
 
         {/* subtitle */}
-        <div className="absolute text-center" style={{ left: 281.59, top: 281, width: 1356.8 }}>
-          <p className="text-[20px] font-normal leading-[31px] text-cod-gray">
+        <div className="absolute text-center" style={{ left: 281.59, top: 278, width: 1356.8 }}>
+          <p className="text-[23px] font-normal leading-[33px] text-cod-gray/80">
             Метод работает как с компаниями №1 на рынке, так и на малом и среднем бизнесе
           </p>
         </div>

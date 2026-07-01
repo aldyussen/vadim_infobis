@@ -149,19 +149,19 @@ export function Hero() {
         <div data-anim="hfade" className="absolute rounded-[20px] bg-white" style={{ left: 56, top: 569.59, width: 812.8, height: 345.59 }} />
 
         {/* 49$ crossed */}
-        <div className="absolute opacity-70" style={{ left: 92.8, top: 615.3, width: 129.59 }}>
-          <p className="text-[35px] font-bold leading-[35px] text-black">49$</p>
+        <div className="absolute opacity-60" style={{ left: 92.8, top: 612, width: 129.59 }}>
+          <p className="text-[38px] font-bold leading-[38px] text-black/60">49$</p>
         </div>
-        <div className="absolute flex h-[65.331px] w-[127.2px] items-center justify-center" style={{ left: 67.19, top: 603.32 }}>
+        <div className="absolute flex h-[65.331px] w-[127.2px] items-center justify-center" style={{ left: 67.19, top: 601 }}>
           <div className="-rotate-[26deg]">
-            <div className="h-[4.8px] bg-brand-red" style={{ width: 139.19 }} />
+            <div className="h-[5px] bg-brand-red" style={{ width: 145 }} />
           </div>
         </div>
 
         {/* free reminder */}
-        <div className="absolute flex flex-col gap-[12px]" style={{ left: 259.19, top: 613.5, width: 611.19 }}>
-          <p className="text-[20px] font-bold leading-[20px] text-black">Успейте зарегистрироваться</p>
-          <p className="text-[20px] font-bold leading-[20px] text-black">БЕСПЛАТНО</p>
+        <div className="absolute flex flex-col gap-[8px]" style={{ left: 259.19, top: 607, width: 611.19 }}>
+          <p className="text-[22px] font-bold leading-[24px] text-black">Успейте зарегистрироваться</p>
+          <p className="text-[34px] font-black uppercase leading-[34px] text-mongoose">Бесплатно</p>
         </div>
 
         {/* register button → modal */}
